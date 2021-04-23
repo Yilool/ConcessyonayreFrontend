@@ -1,0 +1,76 @@
+<div class="container">
+    <h1 class="text-center">Models</h1>
+    <p-divider></p-divider>
+    <div class="row m-1">
+        <div class="col p-buttonset text-end">
+            <button pButton type="button" label="New model" icon="fas fa-plus" class="p-button-warning"
+                routerLink="/vehicles/model"></button>
+        </div>
+    </div>
+    <p-divider type="doted"></p-divider>
+    <p-table *ngIf="!loading && models.length > 0" #dFilter [value]="models" dataKey="id" [rows]="5"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [globalFilterFields]="[
+        'cod',
+        'modelName',
+        'startDate',
+        'finishDate',
+        'brand',
+        'category'
+      ]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="cod">Code</th>
+                <th pSortableColumn="modelName">Model</th>
+                <th pSortableColumn="startDate">CreateDate</th>
+                <th pSortableColumn="finishDate">DeleteDate</th>
+                <th pSortableColumn="brand">Brand</th>
+                <th pSortableColumn="category">Category</th>
+                <th>Operation</th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="cod"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="modelName"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="startDate"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="finishDate"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="brand"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="category"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-model>
+            <tr>
+                <td>{{ model.cod }}</td>
+                <td>{{ model.modelName }}</td>
+                <td>{{ model.startDate | date:'fullDate'}}</td>
+                <td>{{ model.finishDate | date:'fullDate'}}</td>
+                <td>{{ model.brand }}</td>
+                <td>{{ model.category }}</td>
+                <td *ngIf="!model.finishDate">
+                    <button pButton class="m p-button-danger" (click)="delete(model.cod)" icon="fas fa-trash-restore"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div *ngIf="loading" class="alert alert-info text-center">
+        <h3 class="alert-heading">Wait please ...</h3>
+        <i class="fa fa-sync-alt fa-spin fa-10x"></i>
+    </div>
+
+    <div *ngIf="!loading && models.length === 0" class="alert alert-warning text-center">
+        <h3 class="alert-heading">No data log</h3>
+        <i class="fa fa-exclamation fa-10x"></i>
+    </div>
+</div>

@@ -1,10 +1,50 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
+import { IsAdminGuard } from './guards/is-admin.guard';
+import { IsLoggedGuard } from './guards/is-logged.guard';
+import { LoginComponent } from './segurity/login/login.component';
+import { SigninComponent } from './segurity/signin/signin.component';
+import { SignupComponent } from './segurity/signup/signup.component';
+import { UsersComponent } from './segurity/users/users.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'signin',
+    component: SigninComponent,
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    canActivate: [IsLoggedGuard, IsAdminGuard],
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [IsLoggedGuard, IsAdminGuard],
+  },
+  {
+    path: 'vehicles',
+    loadChildren: () =>
+      import('./module/vehicle/vehicle.module').then((m) => m.VehicleModule),
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'home',
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,121 @@
+<div class="main-div">
+  <mat-card class="loginCard">
+    <mat-card-header>
+      <mat-card-title>Sign in</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signinContent">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.name.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.name.errors.required">
+              * The name field is required
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Surname</mat-label>
+          <input matInput placeholder="Surname" formControlName="surname">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.surname.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.surname.errors.required">
+              * The surname field is required
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Bank Account</mat-label>
+          <input matInput placeholder="Account's Number" formControlName="bank">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.bank.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.bank.errors.required">
+              * The bank account field is required
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Address" formControlName="address">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.address.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.address.errors.required">
+              * The address field is required
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput placeholder="Phone Number" formControlName="tlf">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.tlf.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.tlf.errors.required">
+              * The surname field is required
+            </div>
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.tlf.errors.minlength">
+              * Minimum length is 9 numbers
+            </div>
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.tlf.errors.maxLength">
+              * Maximum length is 9 numbers
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>DNI</mat-label>
+          <input matInput placeholder="DNI" formControlName="dni">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.dni.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.dni.errors.required">
+              * The dni field is required
+            </div>
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.dni.errors.minlength">
+              * Minimum length is 9 characters
+            </div>
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.dni.errors.maxLength">
+              * Maximum length is 9 characters
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" formControlName="username">
+          <mat-hint></mat-hint>
+          <ng-container *ngIf="signinContent.controls.username.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.username.errors.required">
+              * The username is required
+            </div>
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.username.errors.minlength">
+              * Minimum length is 4 characters
+            </div>
+          </ng-container>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" [type]="showPassword ? 'text' : 'password'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
+            <mat-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </button>
+          <ng-container *ngIf="signinContent.controls.password.errors != undefined">
+            <div class="errorEnValidacion" *ngIf="signinContent.controls.password.errors.required">
+              * The password is required
+            </div>
+          </ng-container>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="signinContent.invalid"
+        (click)="submitForm()">Sign In</button>
+        <button mat-raised-button color="primary" routerLink="/login">Log In</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

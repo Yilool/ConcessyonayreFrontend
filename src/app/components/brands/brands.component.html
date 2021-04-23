@@ -1,0 +1,64 @@
+<div class="container">
+    <h1 class="text-center">Brands</h1>
+    <p-divider></p-divider>
+    <div class="row m-1">
+        <div class="col p-buttonset text-end">
+            <button pButton type="button" label="New brand" icon="fas fa-plus" class="p-button-warning"
+                routerLink="/vehicles/brand"></button>
+        </div>
+    </div>
+    <p-divider type="doted"></p-divider>
+    <p-table *ngIf="!loading && brands.length > 0" #dFilter [value]="brands" dataKey="id" [rows]="5"
+        [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10]" [loading]="loading" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [globalFilterFields]="[
+        'cod',
+        'brandName',
+        'startDate',
+        'finishDate'
+      ]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="cod">Code</th>
+                <th pSortableColumn="brandName">Brand</th>
+                <th pSortableColumn="startDate">CreateDate</th>
+                <th pSortableColumn="finishDate">DeleteDate</th>
+                <th>Operation</th>
+            </tr>
+            <tr>
+                <th>
+                    <p-columnFilter type="text" field="cod"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="brandName"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="startDate"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="finishDate"></p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-brand>
+            <tr>
+                <td>{{ brand.cod }}</td>
+                <td>{{ brand.brandName }}</td>
+                <td>{{ brand.startDate | date:'fullDate'}}</td>
+                <td>{{ brand.finishDate | date:'fullDate'}}</td>
+                <td *ngIf="!brand.finishDate">
+                    <button pButton class="m p-button-danger" (click)="delete(brand.cod)" icon="fas fa-trash-restore"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div *ngIf="loading" class="alert alert-info text-center">
+        <h3 class="alert-heading">Wait please ...</h3>
+        <i class="fa fa-sync-alt fa-spin fa-10x"></i>
+    </div>
+
+    <div *ngIf="!loading && brands.length === 0" class="alert alert-warning text-center">
+        <h3 class="alert-heading">No data log</h3>
+        <i class="fa fa-exclamation fa-10x"></i>
+    </div>
+</div>

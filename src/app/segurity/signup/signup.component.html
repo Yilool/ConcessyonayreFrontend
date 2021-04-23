@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>
+        New
+        <small> User</small>
+      </h1>
+    </div>
+    <div class="col text-end">
+      <button pButton label="Return to user" icon="fa fa-hand-point-left" routerLink="/users"></button>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <form [formGroup]="signupContent">
+    <div class="p-field m-2">
+      <input pInputText type="text" placeholder="Username" formControlName="username" />
+      <ng-container *ngIf="signupContent.controls.username.errors != undefined">
+        <div class="errorEnValidacion" *ngIf="signupContent.controls.username.errors.required">
+          * The username is required
+        </div>
+        <div class="errorEnValidacion" *ngIf="signupContent.controls.username.errors.minlength">
+          * Minimum length is 4 characters
+        </div>
+      </ng-container>
+    </div>
+    <div class="p-field m-2">
+      <input pInputText [type]="showPassword ? 'password' : 'text'" required placeholder="Password" formControlName="password"/>
+      <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
+        <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <ng-container *ngIf="signupContent.controls.password.errors != undefined">
+        <div class="errorEnValidacion" *ngIf="signupContent.controls.password.errors.required">
+          * The password is required
+        </div>
+      </ng-container>
+    </div>
+    <div class="p-field m-2">
+      <label class="m-1">Select a rol: </label>
+      <select name="rol" formControlName="roles">
+        <option *ngFor="let r of rol" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <p-divider></p-divider>
+    <div class="form-group m-1">
+      <button pButton label="Create" icon="fa fa-save"  [disabled]="signupContent.invalid" (click)="postUser()"></button>
+    </div>
+  </form>
+</div>
