@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Model } from '../model/model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +9,13 @@ export class ModelService {
 
   constructor(private http: HttpClient) {}
 
-  newModel(modelDto: Model) {
+  newModel(model: string, brand: string, category: string) {
+    var modelDto = {
+      modelName: model,
+      brand: brand,
+      category: category
+    }
+
     return this.http.post(`${this.endpoint}`, modelDto);
   }
 

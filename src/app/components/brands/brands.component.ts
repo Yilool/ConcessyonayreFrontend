@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Brands } from 'src/app/model/brand';
+import { Brand } from 'src/app/model/brand';
 import { BrandService } from 'src/app/services/brand.service';
 import Swal from 'sweetalert2';
 
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./brands.component.css']
 })
 export class BrandsComponent implements OnInit {
-  brands: Brands[] = [];
+  brands: Brand[] = [];
   loading = false;
   first = 0;
   rows = 10;
@@ -18,7 +18,7 @@ export class BrandsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    this.brandService.getBrands().subscribe((res: Brands[]) => {
+    this.brandService.getBrands().subscribe((res: Brand[]) => {
       this.brands = res;
     });
     this.loading = false;

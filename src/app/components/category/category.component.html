@@ -1,1 +1,31 @@
-<p>category works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>
+          New
+          <small> Category</small>
+        </h1>
+      </div>
+      <div class="col text-end">
+        <button pButton label="Return to Brands" icon="fa fa-hand-point-left" routerLink="/vehicles/categories"></button>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <form [formGroup]="categoryContent">
+      <div class="p-field m-2">
+        <input pInputText type="text" placeholder="Category" formControlName="categoryName" />
+        <ng-container *ngIf="categoryContent.controls.categoryName.errors != undefined">
+          <div class="errorEnValidacion" *ngIf="categoryContent.controls.categoryName.errors.required">
+            * The caategory is required
+          </div>
+          <div class="errorEnValidacion" *ngIf="categoryContent.controls.categoryName.errors.minlength">
+            * Minimum length is 4 characters
+          </div>
+        </ng-container>
+      </div>
+      <p-divider></p-divider>
+      <div class="form-group m-1">
+        <button pButton label="Create" icon="fa fa-save"  [disabled]="categoryContent.invalid" (click)="postCategory()"></button>
+      </div>
+    </form>
+  </div>

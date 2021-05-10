@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h1>
+          New
+          <small> Brand</small>
+        </h1>
+      </div>
+      <div class="col text-end">
+        <button pButton label="Return to Brands" icon="fa fa-hand-point-left" routerLink="/vehicles/brands"></button>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <form [formGroup]="brandContent">
+      <div class="p-field m-2">
+        <input pInputText type="text" placeholder="Brand" formControlName="brandName" />
+        <ng-container *ngIf="brandContent.controls.brandName.errors != undefined">
+          <div class="errorEnValidacion" *ngIf="brandContent.controls.brandName.errors.required">
+            * The brand is required
+          </div>
+          <div class="errorEnValidacion" *ngIf="brandContent.controls.brandName.errors.minlength">
+            * Minimum length is 4 characters
+          </div>
+        </ng-container>
+      </div>
+      <p-divider></p-divider>
+      <div class="form-group m-1">
+        <button pButton label="Create" icon="fa fa-save"  [disabled]="brandContent.invalid" (click)="postBrand()"></button>
+      </div>
+    </form>
+  </div>
