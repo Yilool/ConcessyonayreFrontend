@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>
+                New
+                <small> Promotion</small>
+            </h1>
+        </div>
+        <div class="col text-end">
+            <button pButton label="Return to Promotions" icon="fa fa-hand-point-left" routerLink="/promos"></button>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <form [formGroup]="promoContent">
+        <div class="p-field m-2">
+            <input pInputText type="text" placeholder="Promotion" formControlName="promoName" />
+            <ng-container *ngIf="promoContent.controls.promoName.errors != undefined">
+                <div class="errorEnValidacion" *ngIf="promoContent.controls.promoName.errors.required">
+                    * The promotion is required
+                </div>
+                <div class="errorEnValidacion" *ngIf="promoContent.controls.promoName.errors.minlength">
+                    * Minimum length is 4 characters
+                </div>
+            </ng-container>
+        </div>
+        <div class="p-field m-2">
+            <input pInputText type="number" placeholder="Discount" formControlName="discount" />
+            <ng-container *ngIf="promoContent.controls.discount.errors != undefined">
+                <div class="errorEnValidacion" *ngIf="promoContent.controls.discount.errors.required">
+                    * The discount is required
+                </div>
+            </ng-container>
+        </div>
+        <p-divider></p-divider>
+        <div class="form-group m-1">
+            <button pButton label="Create" icon="fa fa-save" [disabled]="promoContent.invalid"
+                (click)="postPromotion()"></button>
+        </div>
+    </form>
+</div>

@@ -24,7 +24,8 @@
       </ng-container>
     </div>
     <div class="p-field m-2">
-      <input pInputText [type]="showPassword ? 'password' : 'text'" required placeholder="Password" formControlName="password"/>
+      <input pInputText [type]="showPassword ? 'password' : 'text'" required placeholder="Password"
+        formControlName="password" />
       <button mat-icon-button matSuffix (click)="showPassword = !showPassword">
         <mat-icon>{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
@@ -42,7 +43,7 @@
     </div>
     <p-divider></p-divider>
     <div class="form-group m-1">
-      <button pButton label="Create" icon="fa fa-save"  [disabled]="signupContent.invalid" (click)="postUser()"></button>
+      <button pButton label="Create" icon="fa fa-save" [disabled]="signupContent.invalid" (click)="postUser()"></button>
     </div>
   </form>
 </div>

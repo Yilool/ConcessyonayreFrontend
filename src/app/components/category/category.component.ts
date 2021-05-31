@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
   categoryContent: FormGroup;
@@ -25,10 +25,10 @@ export class CategoryComponent implements OnInit {
       categoryName: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
-      ])
-    })
+      ]),
+    });
   }
- 
+
   resetForm(): void {
     this.submit = false;
     this.categoryContent.reset();
@@ -43,18 +43,26 @@ export class CategoryComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this.categoryService.newCategory(this.categoryContent.controls.categoryName.value).subscribe((res: Category) => {
-      Swal.fire({
-        title: `${res.categoryName}`,
-        text: 'Created',
-        icon: 'success',
-      }).then((res) => {
-        if (res.value) {
-          this.router.navigate(['/vehicles/categories']);
-          this.ngOnInit;
-        }
+    this.categoryService
+      .newCategory(this.categoryContent.controls.categoryName.value)
+      .subscribe((res: Category) => {
+        Swal.fire({
+          title: `${res.categoryName}`,
+          text: 'Created',
+          icon: 'success',
+        }).then((res) => {
+          if (res.value) {
+            this.router.navigate(['/vehicles/categories']);
+            this.ngOnInit;
+          }
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: `${error.error.message}`,
+          text: 'ERROR',
+          icon: 'error',
+        });
       });
-    });
   }
-
 }

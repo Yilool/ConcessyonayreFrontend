@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   selector: 'app-model',
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.css'],
+  
 })
 export class ModelComponent implements OnInit {
   categories: Category[] = [];
@@ -32,10 +33,24 @@ export class ModelComponent implements OnInit {
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
 
     this.brandService.getBrands().subscribe((res: Brand[]) => {
       this.brands = res;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
 
     this.modelContent = new FormGroup({
@@ -62,21 +77,30 @@ export class ModelComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this.modelService.newModel(
-      this.modelContent.controls.modelName.value,
-      this.modelContent.controls.brand.value,
-      this.modelContent.controls.category.value
-    ).subscribe((res: Model) => {
-      Swal.fire({
-        title: `${res.modelName}`,
-        text: 'Created',
-        icon: 'success',
-      }).then((res) => {
-        if (res.value) {
-          this.router.navigate(['/vehicles/models']);
-          this.ngOnInit;
-        }
+    this.modelService
+      .newModel(
+        this.modelContent.controls.modelName.value,
+        this.modelContent.controls.brand.value,
+        this.modelContent.controls.category.value
+      )
+      .subscribe((res: Model) => {
+        Swal.fire({
+          title: `${res.modelName}`,
+          text: 'Created',
+          icon: 'success',
+        }).then((res) => {
+          if (res.value) {
+            this.router.navigate(['/vehicles/models']);
+            this.ngOnInit;
+          }
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: `${error.error.message}`,
+          text: 'ERROR',
+          icon: 'error',
+        });
       });
-    });
   }
 }

@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
   logged: boolean = false;
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   seller: boolean = false;
   customer: boolean = false;
 
-  constructor(private route: Router, private loginService: LoginService) { }
+  constructor(private route: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.logged = this.loginService.isLogged('');
@@ -27,27 +27,27 @@ export class HeaderComponent implements OnInit {
 
     this.loginService.changeLoginStatus$.subscribe((logged: boolean) => {
       this.logged = logged;
-    })
+    });
 
     this.loginService.changeAdminStatus$.subscribe((admin: boolean) => {
       this.admin = admin;
-    })
+    });
 
     this.loginService.changeMechanicStatus$.subscribe((mechanic: boolean) => {
       this.mechanic = mechanic;
-    })
+    });
 
     this.loginService.changeHirerStatus$.subscribe((hirer: boolean) => {
       this.hirer = hirer;
-    })
+    });
 
     this.loginService.changeSellerStatus$.subscribe((seller: boolean) => {
       this.seller = seller;
-    })
+    });
 
     this.loginService.changeCustomStatus$.subscribe((customer: boolean) => {
       this.customer = customer;
-    })
+    });
   }
 
   logout() {

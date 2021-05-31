@@ -1,9 +1,9 @@
 export interface Brand {
-    cod: string;
-	
-	brandName: string;
-	
-	startDate: Date;
-	
-	finishDate: Date;
+  cod: string;
+
+  brandName: string;
+
+  startDate: Date;
+
+  finishDate: Date;
 }

@@ -20,43 +20,43 @@
       ]">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="cod">Code</th>
-                <th pSortableColumn="modelName">Model</th>
-                <th pSortableColumn="startDate">CreateDate</th>
-                <th pSortableColumn="finishDate">DeleteDate</th>
-                <th pSortableColumn="brand">Brand</th>
-                <th pSortableColumn="category">Category</th>
+                <th class="sm-none tb-none dt-none tv-none btv-none" pSortableColumn="cod">Code</th>
+                <th>Model</th>
+                <th class="sm-none tb-none dt-none" pSortableColumn="startDate">CreateDate</th>
+                <th class="sm-none tb-none dt-none" pSortableColumn="finishDate">DeleteDate</th>
+                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="brand">Brand</th>
+                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="category">Category</th>
                 <th>Operation</th>
             </tr>
             <tr>
-                <th>
+                <th class="sm-none tb-none dt-none tv-none btv-none">
                     <p-columnFilter type="text" field="cod"></p-columnFilter>
                 </th>
                 <th>
                     <p-columnFilter type="text" field="modelName"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none">
                     <p-columnFilter type="text" field="startDate"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none">
                     <p-columnFilter type="text" field="finishDate"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none tv-none">
                     <p-columnFilter type="text" field="brand"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none tv-none">
                     <p-columnFilter type="text" field="category"></p-columnFilter>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-model>
             <tr>
-                <td>{{ model.cod }}</td>
+                <td class="sm-none tb-none dt-none tv-none btv-none">{{ model.cod }}</td>
                 <td>{{ model.modelName }}</td>
-                <td>{{ model.startDate | date:'fullDate'}}</td>
-                <td>{{ model.finishDate | date:'fullDate'}}</td>
-                <td>{{ model.brand }}</td>
-                <td>{{ model.category }}</td>
+                <td class="sm-none tb-none dt-none">{{ model.startDate | date:'fullDate'}}</td>
+                <td class="sm-none tb-none dt-none">{{ model.finishDate | date:'fullDate'}}</td>
+                <td class="sm-none tb-none dt-none tv-none">{{ model.brand }}</td>
+                <td class="sm-none tb-none dt-none tv-none">{{ model.category }}</td>
                 <td *ngIf="!model.finishDate">
                     <button pButton class="m p-button-danger" (click)="delete(model.cod)" icon="fas fa-trash-restore"></button>
                 </td>

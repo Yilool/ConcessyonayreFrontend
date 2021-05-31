@@ -20,6 +20,13 @@ export class ModelsComponent implements OnInit {
     this.loading = true;
     this.modelService.getModels().subscribe((res: Model[]) => {
       this.models = res;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
     this.loading = false;
   }
@@ -34,6 +41,13 @@ export class ModelsComponent implements OnInit {
       if (res.value) {
         this.modelService.deleteModel(code).subscribe((res) => {
           this.ngOnInit();
+        },
+        (error) => {
+          Swal.fire({
+            title: `${error.error.message}`,
+            text: 'ERROR',
+            icon: 'error',
+          });
         });
       }
     });

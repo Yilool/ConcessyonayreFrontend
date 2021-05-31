@@ -8,27 +8,24 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-brand',
   templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.css']
+  styleUrls: ['./brand.component.css'],
 })
 export class BrandComponent implements OnInit {
   brandContent: FormGroup;
   submit = false;
   showPassword = false;
 
-  constructor(
-    private brandService: BrandService,
-    private router: Router
-  ) {}
+  constructor(private brandService: BrandService, private router: Router) {}
 
   ngOnInit(): void {
     this.brandContent = new FormGroup({
       brandName: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
-      ])
-    })
+      ]),
+    });
   }
- 
+
   resetForm(): void {
     this.submit = false;
     this.brandContent.reset();
@@ -43,17 +40,26 @@ export class BrandComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this.brandService.newBrand(this.brandContent.controls.brandName.value).subscribe((res: Brand) => {
-      Swal.fire({
-        title: `${res.brandName}`,
-        text: 'Created',
-        icon: 'success',
-      }).then((res) => {
-        if (res.value) {
-          this.router.navigate(['/vehicles/brands']);
-          this.ngOnInit;
-        }
+    this.brandService
+      .newBrand(this.brandContent.controls.brandName.value)
+      .subscribe((res: Brand) => {
+        Swal.fire({
+          title: `${res.brandName}`,
+          text: 'Created',
+          icon: 'success',
+        }).then((res) => {
+          if (res.value) {
+            this.router.navigate(['/vehicles/brands']);
+            this.ngOnInit;
+          }
+        });
+      },
+      (error) => {
+        Swal.fire({
+          title: `${error.error.message}`,
+          text: 'ERROR',
+          icon: 'error',
+        });
       });
-    });
   }
 }

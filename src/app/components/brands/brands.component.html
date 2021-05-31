@@ -18,35 +18,36 @@
       ]">
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="cod">Code</th>
+                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="cod">Code</th>
                 <th pSortableColumn="brandName">Brand</th>
-                <th pSortableColumn="startDate">CreateDate</th>
-                <th pSortableColumn="finishDate">DeleteDate</th>
+                <th class="sm-none" pSortableColumn="startDate">CreateDate</th>
+                <th class="sm-none tb-none dt-none" pSortableColumn="finishDate">DeleteDate</th>
                 <th>Operation</th>
             </tr>
             <tr>
-                <th>
+                <th class="sm-none tb-none dt-none tv-none">
                     <p-columnFilter type="text" field="cod"></p-columnFilter>
                 </th>
                 <th>
                     <p-columnFilter type="text" field="brandName"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none">
                     <p-columnFilter type="text" field="startDate"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none">
                     <p-columnFilter type="text" field="finishDate"></p-columnFilter>
                 </th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-brand>
             <tr>
-                <td>{{ brand.cod }}</td>
+                <td class="sm-none tb-none dt-none tv-none">{{ brand.cod }}</td>
                 <td>{{ brand.brandName }}</td>
-                <td>{{ brand.startDate | date:'fullDate'}}</td>
-                <td>{{ brand.finishDate | date:'fullDate'}}</td>
+                <td class="sm-none">{{ brand.startDate | date:'fullDate'}}</td>
+                <td class="sm-none tb-none dt-none">{{ brand.finishDate | date:'fullDate'}}</td>
                 <td *ngIf="!brand.finishDate">
-                    <button pButton class="m p-button-danger" (click)="delete(brand.cod)" icon="fas fa-trash-restore"></button>
+                    <button pButton class="m p-button-danger" (click)="delete(brand.cod)"
+                        icon="fas fa-trash-restore"></button>
                 </td>
             </tr>
         </ng-template>

@@ -9,9 +9,20 @@ import { CategoriesComponent } from 'src/app/components/categories/categories.co
 import { ModelComponent } from 'src/app/components/model/model.component';
 import { BrandComponent } from 'src/app/components/brand/brand.component';
 import { CategoryComponent } from 'src/app/components/category/category.component';
+import { VehiclesComponent } from 'src/app/components/vehicles/vehicles.component';
+import { VehicleComponent } from 'src/app/components/vehicle/vehicle.component';
 
 const routes: Routes = [
-  //{ path: 'book/:id', component: BookComponent, canActivate: [IsLoggedGuard] },
+  {
+    path: '',
+    component: VehiclesComponent,
+    canActivate: [IsLoggedGuard, IsMechanicGuard],
+  },
+  {
+    path: 'vehicle/:cod',
+    component: VehicleComponent,
+    canActivate: [IsLoggedGuard, IsMechanicGuard],
+  },
   {
     path: 'models',
     component: ModelsComponent,
@@ -41,7 +52,7 @@ const routes: Routes = [
     path: 'category',
     component: CategoryComponent,
     canActivate: [IsLoggedGuard, IsMechanicGuard],
-  }
+  },
 ];
 
 @NgModule({

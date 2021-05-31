@@ -13,12 +13,12 @@ export class CategoryService {
   newCategory(category: Category) {
     return this.http.post(`${this.endpoint}`, category);
   }
-  
+
   deleteCategory(code: string) {
     return this.http.delete(`${this.endpoint}/${code}`);
   }
-  
-    getCategories() {
-      return this.http.get(`${this.endpoint}`);
-    }
+
+  getCategories() {
+    return this.http.get(`${this.endpoint}`);
+  }
 }

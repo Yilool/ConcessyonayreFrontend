@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
-  styleUrls: ['./brands.component.css']
+  styleUrls: ['./brands.component.css'],
 })
 export class BrandsComponent implements OnInit {
   brands: Brand[] = [];
@@ -20,6 +20,13 @@ export class BrandsComponent implements OnInit {
     this.loading = true;
     this.brandService.getBrands().subscribe((res: Brand[]) => {
       this.brands = res;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
     this.loading = false;
   }
@@ -34,6 +41,13 @@ export class BrandsComponent implements OnInit {
       if (res.value) {
         this.brandService.deleteBrand(code).subscribe((res) => {
           this.ngOnInit();
+        },
+        (error) => {
+          Swal.fire({
+            title: `${error.error.message}`,
+            text: 'ERROR',
+            icon: 'error',
+          });
         });
       }
     });

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
@@ -20,6 +20,13 @@ export class CategoriesComponent implements OnInit {
     this.loading = true;
     this.categoryService.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
     this.loading = false;
   }
@@ -34,6 +41,13 @@ export class CategoriesComponent implements OnInit {
       if (res.value) {
         this.categoryService.deleteCategory(code).subscribe((res) => {
           this.ngOnInit();
+        },
+        (error) => {
+          Swal.fire({
+            title: `${error.error.message}`,
+            text: 'ERROR',
+            icon: 'error',
+          });
         });
       }
     });

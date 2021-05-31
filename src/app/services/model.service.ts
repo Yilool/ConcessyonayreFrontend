@@ -13,8 +13,8 @@ export class ModelService {
     var modelDto = {
       modelName: model,
       brand: brand,
-      category: category
-    }
+      category: category,
+    };
 
     return this.http.post(`${this.endpoint}`, modelDto);
   }

@@ -34,7 +34,7 @@ export class SigninComponent implements OnInit {
       ]),
       username: new FormControl('', [
         Validators.required,
-        Validators.minLength(4)
+        Validators.minLength(4),
       ]),
       password: new FormControl('', [Validators.required]),
     });
@@ -83,7 +83,7 @@ export class SigninComponent implements OnInit {
         // si es erronea notifico el error
         (error) => {
           Swal.fire({
-            title: `${error.error.error}`,
+            title: `${error.error.message}`,
             text: 'ERROR',
             icon: 'error',
           });

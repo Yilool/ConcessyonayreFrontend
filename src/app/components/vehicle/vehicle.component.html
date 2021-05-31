@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>
+                <small> Vehicle</small>
+            </h1>
+        </div>
+        <div class="col text-end">
+            <button pButton label="Return to Vehicle" icon="fa fa-hand-point-left" routerLink="/vehicles"></button>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <form (ngSubmit)="postOrPut(data)" #data="ngForm">
+        <div class="p-field m-2">
+            <input pInputText type="number" placeholder="Price" [(ngModel)]="vehicle.basePrice" #basePrice="ngModel"
+                name="basePrice" />
+            <div *ngIf="basePrice.invalid && (basePrice.dirty || basePrice.touched)" class="alert alert-danger">
+                <div *ngIf="basePrice.errors.required">
+                    Price is required.
+                </div>
+            </div>
+        </div>
+        <div class="p-field m-2">
+            <input pInputText type="number" placeholder="Userseat" [(ngModel)]="vehicle.userseats" #userseats="ngModel"
+                name="userseats" />
+            <div *ngIf="userseats.invalid && (userseats.dirty || userseats.touched)" class="alert alert-danger">
+                <div *ngIf="userseats.errors.required">
+                    Userseats is required.
+                </div>
+            </div>
+        </div>
+        <div class="p-field m-2">
+            <label for="fuel">Click for choose a fuel</label>
+            <br>
+            <select class="form-control" name="fuel" [(ngModel)]="vehicle.fuel" required>
+                <option *ngFor="let f of fuels" [value]="f">{{ f }}
+                </option>
+            </select>
+            <br>
+        </div>
+        <div class="p-field m-2">
+            <label for="model">Click for choose a model</label>
+            <br>
+            <select class="form-control" name="model" [(ngModel)]="vehicle.model" required>
+                <option *ngFor="let m of models" [value]="m.modelName">{{ m.cod }} - {{ m.modelName }}
+                </option>
+            </select>
+            <br>
+        </div>
+        <div class="p-field m-2">
+            <button mat-button type="button" (click)="fileInput.click()">
+                Add vehicle image
+            </button>
+            <input (change)="vehicleImage()" #fileInput type="file" id="img">
+        </div>
+        <p-divider></p-divider>
+        <div class="form-group m-1">
+            <button pButton label="Create" icon="fa fa-save" type="submit"></button>
+        </div>
+    </form>
+</div>

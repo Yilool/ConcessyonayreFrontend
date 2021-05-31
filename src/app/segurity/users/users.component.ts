@@ -25,6 +25,13 @@ export class UsersComponent implements OnInit {
       this.users = res;
 
       this.loading = false;
+    },
+    (error) => {
+      Swal.fire({
+        title: `${error.error.message}`,
+        text: 'ERROR',
+        icon: 'error',
+      });
     });
   }
 
@@ -38,6 +45,13 @@ export class UsersComponent implements OnInit {
       if (res.value) {
         this.userService.deleteUser(user.username).subscribe((res) => {
           this.ngOnInit();
+        },
+        (error) => {
+          Swal.fire({
+            title: `${error.error.message}`,
+            text: 'ERROR',
+            icon: 'error',
+          });
         });
       }
     });

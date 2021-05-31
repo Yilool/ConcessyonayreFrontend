@@ -19,22 +19,22 @@
         <ng-template pTemplate="header">
             <tr>
                 <th pSortableColumn="name">Username</th>
-                <th pSortableColumn="roles">Rol</th>
-                <th pSortableColumn="createTime">CreateDate</th>
-                <th pSortableColumn="deleteTime">DeleteDate</th>
+                <th class="sm-none tb-none" pSortableColumn="roles">Rol</th>
+                <th class="sm-none tb-none dt-none" pSortableColumn="createTime">CreateDate</th>
+                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="deleteTime">DeleteDate</th>
                 <th>Operacion</th>
             </tr>
             <tr>
                 <th>
                     <p-columnFilter type="text" field="username"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none">
                     <p-columnFilter type="text" field="roles"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none">
                     <p-columnFilter type="text" field="createTime"></p-columnFilter>
                 </th>
-                <th>
+                <th class="sm-none tb-none dt-none tv-none">
                     <p-columnFilter type="text" field="deleteTime"></p-columnFilter>
                 </th>
             </tr>
@@ -42,9 +42,9 @@
         <ng-template pTemplate="body" let-user>
             <tr>
                 <td>{{ user.username }}</td>
-                <td>{{ user.roles }}</td>
-                <td>{{ user.createTime | date:'fullDate'}}</td>
-                <td>{{ user.deleteTime | date:'fullDate'}}</td>
+                <td class="sm-none tb-none">{{ user.roles }}</td>
+                <td class="sm-none tb-none dt-none">{{ user.createTime | date:'fullDate'}}</td>
+                <td class="sm-none tb-none dt-none tv-none">{{ user.deleteTime | date:'fullDate'}}</td>
                 <td *ngIf="!user.deleteTime">
                     <button pButton class="m p-button-danger" (click)="delete(user)" icon="fa fa-user-times"></button>
                 </td>

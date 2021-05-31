@@ -31,7 +31,8 @@ export class LoginService {
   public changeAdminStatus$ = this.changeAdminStatusSubject.asObservable();
 
   public changeMechanicStatusSubject = new Subject<boolean>();
-  public changeMechanicStatus$ = this.changeMechanicStatusSubject.asObservable();
+  public changeMechanicStatus$ =
+    this.changeMechanicStatusSubject.asObservable();
 
   public changeHirerStatusSubject = new Subject<boolean>();
   public changeHirerStatus$ = this.changeHirerStatusSubject.asObservable();
@@ -43,7 +44,7 @@ export class LoginService {
   public changeCustomStatus$ = this.changeCustomStatusSubject.asObservable();
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private router: Router,
     private jwt: JwtService
   ) {}
@@ -103,7 +104,7 @@ export class LoginService {
       },
       (error) => {
         Swal.fire({
-          title: `${error.error}`,
+          title: `${error.error.message}`,
           text: 'Exception',
           icon: 'error',
         });

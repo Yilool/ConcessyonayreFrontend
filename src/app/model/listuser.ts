@@ -1,9 +1,9 @@
 export interface ListUser {
-    username: string;
-	
-	roles: string;
-	
-	createTime: Date;
+  username: string;
 
-	deleteTime: Date;
+  roles: string;
+
+  createTime: Date;
+
+  deleteTime: Date;
 }

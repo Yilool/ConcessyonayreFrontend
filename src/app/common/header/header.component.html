@@ -10,18 +10,22 @@
             <li *ngIf="logged && admin" class="nav-item">
                 <a class="nav-link" routerLink="/users">Users</a>
             </li>
+            <li *ngIf="logged && admin" class="nav-item">
+                <a class="nav-link" routerLink="/promos">Promotions</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Vehicles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Vehicles catalog</a>
-                    <div *ngIf="mechanic" class="dropdown-divider"></div>
-                    <a *ngIf="mechanic" class="dropdown-item" href="#">Manage vehicles</a>
-                    <a *ngIf="mechanic" class="dropdown-item" routerLink="/vehicles/models">Manage models</a>
-                    <a *ngIf="mechanic" class="dropdown-item" routerLink="/vehicles/brands">Manage brands</a>  
-                    <a *ngIf="mechanic" class="dropdown-item" routerLink="/vehicles/categories">Manage categories</a>      
+                    <a *ngIf="!seller" class="dropdown-item" href="#">Vehicles catalog</a>
+                    <a *ngIf="seller" class="dropdown-item" href="/purchase">Purchase catalog</a>
+                    <div *ngIf="logged && mechanic" class="dropdown-divider"></div>
+                    <a *ngIf="logged && mechanic" class="dropdown-item" routerLink="/vehicles">Manage vehicles</a>
+                    <a *ngIf="logged && mechanic" class="dropdown-item" routerLink="/vehicles/models">Manage models</a>
+                    <a *ngIf="logged && mechanic" class="dropdown-item" routerLink="/vehicles/brands">Manage brands</a>
+                    <a *ngIf="logged && mechanic" class="dropdown-item" routerLink="/vehicles/categories">Manage categories</a>
                 </div>
             </li>
         </ul>

@@ -40,7 +40,7 @@ export class InterceptorService implements HttpInterceptor {
           'Content-Type',
           'application/json; charset=utf-8'
         ),
-      }); 
+      });
     }
 
     // Especifico que la petición http va a aceptar una respuesta en formato JSON.
@@ -67,5 +67,4 @@ export class InterceptorService implements HttpInterceptor {
       finalize(() => {})
     );
   }
-
 }

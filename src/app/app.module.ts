@@ -38,6 +38,11 @@ import { CategoryComponent } from './components/category/category.component';
 import { ModelsComponent } from './components/models/models.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { VehicleComponent } from './components/vehicle/vehicle.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { PromotionComponent } from './components/promotion/promotion.component';
+import { PromotionsComponent } from './components/promotions/promotions.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,11 @@ import { CategoriesComponent } from './components/categories/categories.componen
     ModelsComponent,
     BrandsComponent,
     CategoriesComponent,
+    VehicleComponent,
+    VehiclesComponent,
+    PromotionComponent,
+    PromotionsComponent,
+    PurchaseComponent,
   ],
   imports: [
     BrowserModule,
