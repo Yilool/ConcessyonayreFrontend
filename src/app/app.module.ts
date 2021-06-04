@@ -43,6 +43,8 @@ import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { PromotionComponent } from './components/promotion/promotion.component';
 import { PromotionsComponent } from './components/promotions/promotions.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { RatingComponent } from './components/rating/rating.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
     PromotionComponent,
     PromotionsComponent,
     PurchaseComponent,
+    RatingComponent,
+    CatalogComponent,
   ],
   imports: [
     BrowserModule,

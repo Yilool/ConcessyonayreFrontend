@@ -1,34 +1,23 @@
 <div class="container">
-    <h1 class="text-center">Purchase</h1>
+    <h1 class="text-center">Rates</h1>
     <p-divider></p-divider>
     <p-table *ngIf="!loading && vehicles.length > 0" #dFilter [value]="vehicles" dataKey="id" [rows]="5"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10]" [loading]="loading" [paginator]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [globalFilterFields]="[
-        'cod',
         'enrollment',
-        'basePrice',
-        'userseats',
         'fuel',
         'model'
       ]">
         <ng-template pTemplate="header">
             <tr>
-                <th class="sm-none" pSortableColumn="cod">Code</th>
-                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="basePrice">Price</th>
-                <th class="sm-none tb-none dt-none tv-none" pSortableColumn="userseats">Userseats</th>
+                <th class="sm-none tb-none dt-none tv-none btv-none" pSortableColumn="enrollment">Enrollment</th>
                 <th class="sm-none tb-none dt-none" pSortableColumn="fuel">Fuel</th>
                 <th pSortableColumn="model">Model</th>
                 <th>Operation</th>
             </tr>
             <tr>
-                <th class="sm-none">
-                    <p-columnFilter type="text" field="cod"></p-columnFilter>
-                </th>
-                <th class="sm-none tb-none dt-none tv-none">
-                    <p-columnFilter type="text" field="basePrice"></p-columnFilter>
-                </th>
-                <th class="sm-none tb-none dt-none tv-none">
-                    <p-columnFilter type="text" field="userseats"></p-columnFilter>
+                <th class="sm-none tb-none dt-none tv-none btv-none">
+                    <p-columnFilter type="text" field="enrollment"></p-columnFilter>
                 </th>
                 <th class="sm-none tb-none dt-none">
                     <p-columnFilter type="text" field="fuel"></p-columnFilter>
@@ -39,15 +28,12 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-car>
-            <tr *ngIf="!car.enrollment">
-                <td class="sm-none">{{ car.cod }}</td>
-                <td class="sm-none tb-none dt-none tv-none">{{ car.basePrice }} €</td>
-                <td class="sm-none tb-none dt-none tv-none">{{ car.userseats }} seats</td>
+            <tr>
+                <td class="sm-none tb-none dt-none tv-none btv-none">{{ car.enrollment }}</td>
                 <td class="sm-none tb-none dt-none">{{ car.fuel }}</td>
                 <td>{{ car.model }}</td>
                 <td>
-                    <button pButton class="m p-button-danger"
-                        (click)="buyVehicle(car.cod)" icon="fas fa-car"></button>
+                    <button pButton class="m p-button-danger" (click)="rateVehicle(car.cod)" icon="fas fa-star"></button>
                 </td>
             </tr>
         </ng-template>
@@ -56,10 +42,5 @@
     <div *ngIf="loading" class="alert alert-info text-center">
         <h3 class="alert-heading">Wait please ...</h3>
         <i class="fa fa-sync-alt fa-spin fa-10x"></i>
-    </div>
-
-    <div *ngIf="!loading && vehicles.length === 0" class="alert alert-warning text-center">
-        <h3 class="alert-heading">No data log</h3>
-        <i class="fa fa-exclamation fa-10x"></i>
     </div>
 </div>

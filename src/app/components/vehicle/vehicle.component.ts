@@ -90,9 +90,9 @@ export class VehicleComponent implements OnInit {
     Swal.showLoading();
 
     this.vehicleService.newVehicle(this.vehicle).subscribe(
-      (res) => {
+      (res: Vehicle) => {        
         Swal.fire({
-          title: `${this.vehicle.cod}`,
+          title: `${res.cod}`,
           text: 'Created',
           icon: 'success',
         });
@@ -120,9 +120,9 @@ export class VehicleComponent implements OnInit {
     Swal.showLoading();
 
     this.vehicleService.updateVehicle(this.vehicle).subscribe(
-      (res) => {
+      (res: Vehicle) => {
         Swal.fire({
-          title: `${this.vehicle.cod}`,
+          title: `${res.cod}`,
           text: 'Updated',
           icon: 'success',
         });

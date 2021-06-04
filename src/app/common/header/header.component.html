@@ -13,13 +13,16 @@
             <li *ngIf="logged && admin" class="nav-item">
                 <a class="nav-link" routerLink="/promos">Promotions</a>
             </li>
+            <li *ngIf="logged && customer" class="nav-item">
+                <a class="nav-link" [routerLink]="['/rating', cus]">Rating</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Vehicles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a *ngIf="!seller" class="dropdown-item" href="#">Vehicles catalog</a>
+                    <a *ngIf="!seller" class="dropdown-item" href="/catalog">Vehicles catalog</a>
                     <a *ngIf="seller" class="dropdown-item" href="/purchase">Purchase catalog</a>
                     <div *ngIf="logged && mechanic" class="dropdown-divider"></div>
                     <a *ngIf="logged && mechanic" class="dropdown-item" routerLink="/vehicles">Manage vehicles</a>

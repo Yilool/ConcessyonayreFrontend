@@ -88,6 +88,7 @@ export class LoginService {
               this.changeSellerStatusSubject.next(true);
               break;
             default:
+              localStorage.setItem("cus", jwtDecode.cod)
               localStorage.setItem(this.ISCUSTOM, 'true');
               this.changeCustomStatusSubject.next(true);
               break;

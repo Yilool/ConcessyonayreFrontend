@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   hirer: boolean = false;
   seller: boolean = false;
   customer: boolean = false;
+  cus: number;
 
   constructor(private route: Router, private loginService: LoginService) {}
 
@@ -48,6 +49,8 @@ export class HeaderComponent implements OnInit {
     this.loginService.changeCustomStatus$.subscribe((customer: boolean) => {
       this.customer = customer;
     });
+
+    this.cus = Number(localStorage.getItem("cus"));
   }
 
   logout() {

@@ -51,7 +51,7 @@
             <button mat-button type="button" (click)="fileInput.click()">
                 Add vehicle image
             </button>
-            <input (change)="vehicleImage()" #fileInput type="file" id="img">
+            <input hidden (change)="vehicleImage()" #fileInput type="file" id="img">
         </div>
         <p-divider></p-divider>
         <div class="form-group m-1">

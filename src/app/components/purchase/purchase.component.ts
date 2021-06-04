@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Msg } from 'src/app/model/msg';
+import { Promotion } from 'src/app/model/promotion';
 import { Vehicle } from 'src/app/model/vehicle';
+import { PromotionService } from 'src/app/services/promotion.service';
 import { PurchaseService } from 'src/app/services/purchase.service';
 import { VehicleService } from 'src/app/services/vehicle.service';
 import Swal from 'sweetalert2';
@@ -15,11 +18,13 @@ export class PurchaseComponent implements OnInit {
   first = 0;
   rows = 10;
   customers: any;
+  promos: Promotion[] = [];
   financing = false;
 
   constructor(
     private vehicleService: VehicleService,
-    private purchaseService: PurchaseService
+    private purchaseService: PurchaseService,
+    private promoService: PromotionService
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +43,7 @@ export class PurchaseComponent implements OnInit {
     );
     this.purchaseService.getCustomers().subscribe(
       (res) => {
-        console.log(res);
-        //this.customers = res;
+        this.customers = res;
       },
       (error) => {
         Swal.fire({
@@ -49,34 +53,77 @@ export class PurchaseComponent implements OnInit {
         });
       }
     );
+    this.promoService.getPromotions().subscribe((res: Promotion[]) => {
+      res.forEach((promo) => {
+        let dnow = new Date(Date.now());
+        let d1 = new Date(promo.startDate);
+        let d2;
+
+        if (promo.finishDate) {
+          d2 = new Date(promo.finishDate)
+        }
+        
+        if (d1 < dnow && (!d2 || dnow < d2)) {
+          this.promos.push(promo);
+        }
+      });
+    });
     this.loading = false;
   }
 
   buyVehicle(vehicle: string) {
     Swal.fire({
       title: 'Purchase Form',
-      html: `<input type="text" id="enrollment" class="swal2-input" placeholder="Enrollment">`,
+      html: `<input type="text" class="swal2-input" placeholder="Enrollment">
+      <input type="text" class="swal2-input" placeholder="Custom DNI">
+      <input type="text" class="swal2-input" placeholder="Promotion">`,
       confirmButtonText: 'Buy',
       focusConfirm: false,
       preConfirm: () => {
-        const customer;
-        const enrollment; 
-        const promo;
-        //Swal.getPopup().querySelector('#login');
-        //const password = Swal.getPopup().querySelector('#password');
-        if (!customer || !enrollment || !promo) {
-          Swal.showValidationMessage(`Please enter login and password`);
-        }
+        var customer: string;
+        var promotion: string;
+        var enrollment = Swal.getPopup().getElementsByTagName('input')[0].value;
+        var dni = Swal.getPopup().getElementsByTagName('input')[1].value;
+        var promo = Swal.getPopup().getElementsByTagName('input')[2].value;
         
-        return { login: login, password: password };
+        if (!enrollment || !dni || !promo) {
+          Swal.showValidationMessage(`Please complete all fields`);
+        }
+
+        this.customers.forEach(c => {
+          if (c.dni == dni) {
+            customer = c.cod;
+          }
+        });
+
+        this.promos.forEach(p => {
+          if (p.promoname == promo) {
+            promotion = p.cod;
+          }
+        });
+        
+        if (!customer) {
+          Swal.showValidationMessage(`Customer not exist`);
+        }
+
+        if (!promotion) {
+          Swal.showValidationMessage(`Promotion not exist`);
+        }
+
+        this.purchaseService.newPurchase(vehicle, customer, enrollment, promotion).subscribe(
+          (res: Msg) => {
+            Swal.fire(res.msg);
+            this.ngOnInit();
+          },
+          (error) => {
+            Swal.fire({
+              title: `${error.error.message}`,
+              text: 'ERROR',
+              icon: 'error',
+            });
+          }
+        );
       },
-    }).then((result) => {
-      Swal.fire(
-        `
-        Login: ${result.value.login}
-        Password: ${result.value.password}
-      `.trim()
-      );
     });
   }
 }

@@ -1,0 +1,33 @@
+<div class="container">
+    <h1 class="text-center">Vehicles Catalog</h1>
+    <p-divider></p-divider>
+
+    <div>
+        <div *ngFor="let car of vehicles" class="card m-1">
+            <div class="card-header">
+                <h1>{{ car.model }}</h1>
+            </div>
+            <img src="data:image/png;base64,{{ car.imagen }}" class="card-img-top" alt="Car Photo">
+            <div class="card-body">
+                <h2 class="card-title">BasePrice: {{ car.basePrice }}</h2>
+                <h3>
+                    Fuel: {{ car.fuel }}
+                </h3>
+                <h3>
+                    Seats: {{ car.userseats }}
+                </h3>
+            </div>
+            <div *ngIf="car.rate != nan" class="card-footer"><b>{{ car.rate }}</b></div>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="alert alert-info text-center">
+        <h3 class="alert-heading">Wait please ...</h3>
+        <i class="fa fa-sync-alt fa-spin fa-10x"></i>
+    </div>
+
+    <div *ngIf="!loading && vehicles.length === 0" class="alert alert-warning text-center">
+        <h3 class="alert-heading">No data log</h3>
+        <i class="fa fa-exclamation fa-10x"></i>
+    </div>
+</div>
