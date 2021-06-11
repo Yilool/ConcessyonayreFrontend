@@ -16,6 +16,7 @@ import { map, finalize } from 'rxjs/operators';
 export class InterceptorService implements HttpInterceptor {
   // dirección del servidor al que se van a conectar las peticiones http
   urlWebAPI = 'http://localhost:8080';
+  //urlWebAPI = 'http://146.59.157.183:8080/concesionario';
 
   constructor(private jwt: JwtService) {}
 
